@@ -1,0 +1,36 @@
+import discord
+from discord.ext import commands
+import yahoo_fin
+from yahoo_fin import stock_info as si
+
+bot = commands.Bot(command_prefix='!')
+
+@bot.event
+async def on_ready():
+    print('Bot is ready')
+
+@bot.command(name='winners')
+async def winners(ctx):
+    await ctx.send (si.get_day_gainers())
+
+@bot.command(name="losers")
+async def losers(ctx):
+    await ctx.send (si.get_day_losers())
+
+@bot.command(name="most_active")
+async def most_active(ctx):
+    await ctx.send (si.get_day_most_active())
+
+@bot.command("top_crypto")
+async def top_crypto(ctx):
+    await ctx.send (si.get_top_crypto())
+
+@bot.event
+async def on_message(message):
+    if message.content.startswith('!price'):
+        stock = message.content.split(' ')[1]
+        await message.channel.send (si.get_live_price(str(stock)))
+
+    await bot.process_commands(message)
+
+bot.run ('Token')
