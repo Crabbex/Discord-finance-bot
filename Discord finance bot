@@ -86,11 +86,10 @@ async def on_message(message):
 
 @bot.event
 async def on_message(message):
-    try:
-        if message.content.startswith("!cash_flow_q"):
-            stock = message.content.split(' ')[1]
+    if message.content.startswith("!cash_flow_q"):
+        stock = message.content.split(' ')[1]
         await message.channel.send (si.get_cash_flow(str(stock), yearly = False))
 
-        await bot.process_commands(message)
+    await bot.process_commands(message)
 
 bot.run ('Token')
