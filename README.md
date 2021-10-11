@@ -12,6 +12,14 @@ List of commands:
 
 !top_crypto - Best performing crypto currencies
 
-!price - Write !price + stock ticker in capital letters to get current stock price. Example !price TSLA
+!price - Write !price + stock ticker to get current stock price. Example !price TSLA
 
-!analyst_info - Write !analyst_info + stock ticker in capital letters to get analyst info. Example !analyst_info TSLA
+!analyst_info - Write !analyst_info + stock ticker to get analyst info. Example !analyst_info TSLA
+
+!balance_sheet - Write !analyst_info + stock ticker to get yearly balance sheet. Example !balance_sheet TSLA
+
+!balance_sheet - Write !analyst_info_q + stock ticker to get quarterly balance sheet. Example !balance_sheet_q TSLA
+
+!cash_flow - Write !cash_flow + stock ticker to get yearly cash flow. Example !cash_flow TSLA
+
+cash_flow - Write !cash_flow_q + stock ticker to get quarterly cash flow. Example !cash_flow_q TSLA
