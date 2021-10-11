@@ -7,7 +7,26 @@ bot = commands.Bot(command_prefix='!')
 
 @bot.event
 async def on_ready():
-    print('Bot is ready')
+        print("--------------------")
+        print("Logged in as")
+        print(bot.user.name)
+        print(bot.user.id)
+        print("--------------------")
+        
+@bot.command("commands")
+async def commands(ctx):
+    embed=discord.Embed(
+        title="",
+        description=
+    "-----------------------------------------------------------------------------------------------"
+    "\n!winners - Best performing stocks of the day"
+    "\n!losers - Worst performing stocks of the day"
+    "\n!most_active - Most active stocks of the day"
+    "\n!top_crypto - Best performing crypto currencies"
+    "\n!price - Write !price + stock ticker in capital letters to get current stock price. Example !price TSLA"
+    "\n!analyst_info - Write !analyst_info + stock ticker in capital letters to get analyst info. Example !analyst_info TSLA"
+    "\n-----------------------------------------------------------------------------------------------")
+    await ctx.send(embed=embed)
 
 @bot.command(name='winners')
 async def winners(ctx):
@@ -32,5 +51,46 @@ async def on_message(message):
         await message.channel.send (si.get_live_price(str(stock)))
 
     await bot.process_commands(message)
+    
+   @bot.event
+async def on_message(message):
+    if message.content.startswith("!analyst_info"):
+        ticker = message.content.split(' ')[1]
+        await message.channel.send (si.get_analysts_info(str(ticker)))
+
+    await bot.process_commands(message)
+    
+@bot.event
+async def on_message(message):
+    if message.content.startswith("!balance_sheet"):
+        stock = message.content.split(' ')[1]
+        await message.channel.send (si.get_balance_sheet(str(stock), yearly = True))
+
+        await bot.process_commands(message)
+
+@bot.event
+async def on_message(message):
+    if message.content.startswith("!balance_sheet_q"):
+        stock = message.content.split(' ')[1]
+        await message.channel.send (si.get_balance_sheet(str(stock), yearly = False))
+
+    await bot.process_commands(message)
+
+@bot.event
+async def on_message(message):
+    if message.content.startswith("!cash_flow"):
+        stock = message.content.split(' ')[1]
+        await message.channel.send (si.get_cash_flow(str(stock), yearly = True))
+
+    await bot.process_commands(message)
+
+@bot.event
+async def on_message(message):
+    try:
+        if message.content.startswith("!cash_flow_q"):
+            stock = message.content.split(' ')[1]
+        await message.channel.send (si.get_cash_flow(str(stock), yearly = False))
+
+        await bot.process_commands(message)
 
 bot.run ('Token')
